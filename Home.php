@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<!-- <?php
+
+  // include 'session.php';
+  // echo $_SESSION['user_login'];
+
+ ?> -->
+
+
+
 <html>
   <head>
 
@@ -7,21 +16,19 @@
   <body>
 
     <header>
-
       <!-- The <i> tag below includes the sticky note icon from Font Awesome -->
       <h1><a href="/"><i class="fa fa-bicycle"></i>TheBikeLocker</a></h1>
 
       <nav>
         <ul class="navbar-list">
-          <li class="navbar-item"><a href="./Home.html">Home</a></li>
-          <li class="navbar-item"><a href="./Account.html">Account</a></li>
-          <li class="navbar-item"><a href="./stolenBikes.html">Stolen Bikes log</a></li>
-          <li class="navbar-item"><a href="/ReportBike">Report stolen bike</a></li>
-
+          <li class="navbar-item"><a href="./Home.php">Home</a></li>
+          <li class="navbar-item"><a href="./Account.php">Account</a></li>
+          <li class="navbar-item"><a href="./stolenBikes.php">Stolen Bikes log</a></li>
+          <li class="navbar-item"><a href="./reportStolen.php">Report stolen bike</a></li>
+          <li class="navbar-item"><a href="./signUp.php">Create Account</a></li>
           <li class="navbar-item navbar-right"><a href="./About.html">About</a></li>
         </ul>
       </nav>
-
     </header>
 
 
@@ -48,5 +55,5 @@
 
   <script src="/index.js"></script>
 
+
 </html>
-<!-- > -->
