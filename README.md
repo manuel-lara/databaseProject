@@ -1,2 +1,0 @@
-# databaseProject
-database project

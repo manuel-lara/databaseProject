@@ -37,7 +37,7 @@ nav {
 }
 
 .navbar-list {
-  list-style-type: none;
+  list-style-type: circle;
   padding: 0;
   margin: 0 20px;
 }
@@ -123,8 +123,10 @@ main h1 {
   text-align: center;
 }
 
-.todo-body {
-  display: none;
+.todo-body:hover {
+  /*display: block;*/
+  /*background-color: black;*/
+  /*color: black;*/
 }
 
 .bike {
@@ -188,8 +190,9 @@ footer .copyright {
   font-weight: 200;
 }
 
-.hidden {
+ .hidden:{
   display: none;
+  background-color: black;
 }
 
 .modal-header h3 {
@@ -299,5 +302,19 @@ footer .copyright {
 
 .search-dialog {
 
-  display: inline-block;  
+  display: inline-block;
 }
+
+.table {
+  align-content: center;
+  font-size: 100px;
+
+}
+
+.table tr td {
+  font-size: 100px;
+}
+
+/*.form {
+  align-content:center;
+}*/
