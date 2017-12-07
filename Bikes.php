@@ -68,25 +68,14 @@
       						if (!$result) {
       							die("Query to show fields from table failed");
       						}
-      						// get number of columns in table
-      						$fields_num = mysqli_num_fields($result);
 
       						echo "</tr>\n";
       						while($row = mysqli_fetch_row($result)) {
-      								echo "<section class='todo' style='background-Image: url($row[6])' >";
-      								// echo 	"<a href='bikePage.php?serialnum=$row[0]&section=$row[1]' >$row[7] $row[8] </a>";
+      								echo "<section class='todo' style='background-Image: url($row[6]); background-Im=10px;' >";
                       echo 	"<a href='bikePage.php?postID=$row[2]' >$row[7] $row[8] </a>";
       								echo 		"<div class='todo-body' >";
-      								// echo 			"<p class='indent-wrapped'><span class='where'>where: </span>{{{where}}}</p>";
-      								// echo 			"<p class='indent-wrapped'><span class='when'>when: </span>{{{when}}}</p>";
-      								// echo 			"<p class='Serial'>{{{serial}}}</p>";
-      								// echo 			"<p>{{{details}}}</p>";
-      							  if ($row[1]) {
-                        echo 			"<p> Stolen</p>";
-      							  }
-                      else {
-                        echo 			"<p> Found</p>";
-                      }
+      							  if ($row[1]) {echo "<p> Stolen</p>"; }
+                      else {echo "<p> Found</p>"; }
       								echo 		"</div>";
       								echo 	"</section>";
       						}

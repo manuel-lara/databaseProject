@@ -1,8 +1,5 @@
 <?php
   session_start();
-  // if(isset($_SESSION['user_login'])) {
-  //   $current_user = $_SESSION['user_login'];
-  // }
   include 'connect.php';
 ?>
   <!DOCTYPE html>
@@ -20,30 +17,20 @@
             <li class="navbar-item"><a href="./reportStolen.php">Report Bike</a></li>
             <li class="navbar-item"><a href="./About.php">About</a></li>
             <?php
-              if(isset($_SESSION['user_login'])) {
-                echo "<li class='navbar-item navbar-right'><a href='./logOut.php'>Log Out</a></li>";
-              }
-              else{
-                echo "<li class='navbar-item navbar-right'><a href='./Login.php'>Log In</a></li>";
-              }
+              if(isset($_SESSION['user_login'])) { echo "<li class='navbar-item navbar-right'><a href='./logOut.php'>Log Out</a></li>"; }
+              else{ echo "<li class='navbar-item navbar-right'><a href='./Login.php'>Log In</a></li>"; }
             ?>
           </ul>
         </nav>
       </header>
-
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="screen">
     <link rel="stylesheet" href="style.css" media="screen">
-
     </head>
     <body>
-
       <main>
         <div class="info-container">
           <?php
-
             $postID = $_GET['postID'];
-            // $stolen = $_GET['section'];
 
             $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
             if (!$conn) {
@@ -52,9 +39,7 @@
             // Retrieve info from "stolen bike table"
             $query = "SELECT * FROM Posts P INNER JOIN Images I ON P.postID = I.postID
                       INNER JOIN Bike B on P.serialnum = B.serialnum INNER JOIN Users U ON P.userID = U.userID
-                      WHERE P.postID = '$postID'
-                      ";
-                      // AND B.stolen = '$stolen'
+                      WHERE P.postID = '$postID' ";
 
             $result = mysqli_query($conn, $query);
             if (!$result) {
@@ -82,13 +67,40 @@
               	     <td><b>User</b></td>
                      <td><b>Comment</b></td>";
 
-
               	while($row = mysqli_fetch_row($result)) {
               		echo "<tr>";
-              		foreach($row as $cell)
-              			echo "<td>$cell</td>";
+              		foreach($row as $cell) {
+                    echo "<td>$cell</td>";
+                  }
               		echo "</tr>\n";
               	}
+
+                echo "<form action='' method='post'>
+                        <p>
+                          <label for='Comment'>Post Comment</label>
+                          <input type='text' name='Comment'>
+                        </p>
+                        <input type='submit' value='Comment' name='post'>
+                      </form>";
+
+                if (isset($_POST['post'])) {
+
+                  $query1 = mysqli_query($conn, "SELECT * FROM Comment");
+                  $commentID = 1;
+                  while($count = mysqli_fetch_row($query1)) {
+                    $commentID = $commentID+1;
+                  }
+                  $content = mysqli_real_escape_string($conn, $_POST['Comment']);
+                  $userID = mysqli_real_escape_string($conn, $_SESSION['user_login']);
+
+                  $stmt = $conn->prepare("INSERT INTO Comment (commentID, userID, postID, content) VALUES (?, ?, ?, ?)");
+                  $stmt->bind_param("ssss", $commentID, $userID, $postID, $content);
+                  $stmt->execute();
+                  $stmt->close();
+
+                  echo "<script type='text/javascript'>alert('Comment Posted');</script>";
+                  echo "<script type='text/javascript'>window.location.reload();</script>";
+                }
             }
             mysqli_free_result($result);
             mysqli_close($conn);

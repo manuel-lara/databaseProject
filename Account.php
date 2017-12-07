@@ -46,11 +46,9 @@
               }
               // Retrieve info from "stolen bike table"
               $query = "SELECT Distinct * FROM Posts P
-                         NATURAL JOIN Images I
-                         NATURAL JOIN Bike B
-                         WHERE P.userID = '$currentUser'";
-
-
+                        NATURAL JOIN Images I
+                        NATURAL JOIN Bike B
+                        WHERE P.userID = '$currentUser'";
 
               $result = mysqli_query($conn, $query);
               if (!$result) {
@@ -62,22 +60,24 @@
                   echo "<section class='todo' style='background-Image: url($row[6])' >";
                   echo 	"<a href='bikePage.php?postID=$row[2]' >$row[7] $row[8] </a>";
                   echo 		"<div class='todo-body' >";
-                  // echo 			"<p class='indent-wrapped'><span class='where'>where: </span>{{{where}}}</p>";
-                  // echo 			"<p class='indent-wrapped'><span class='when'>when: </span>{{{when}}}</p>";
-                  // echo 			"<p class='Serial'>{{{serial}}}</p>";
-                  // echo 			"<p>{{{details}}}</p>";
-                  // echo 			"<p class='hidden'>http://cdn.mos.bikeradar.imdserve.com/images/bikes-and-gear/bikes/mountain-bikes/1450351584499-1wwm4j25hnwcn-1000-90.jpg</p";
+                  echo      "<img src='' data-id='$row[2]'>";
                   echo 		"</div>";
+                  echo "<input onClick='rem($row[0], $row[1])'type='submit' value='Remove' name='Remove'>";
                   echo 	"</section>";
               }
+
               mysqli_free_result($result);
               mysqli_close($conn);
-
             }
             else {
               echo "<script type='text/javascript'>window.location.assign('./Login.php');</script>";
             }
           ?>
+          <script>
+                  function rem(ser, stol) {
+                    window.location = './deletePost.php?postID=' + ser + '-' + stol;
+                  }
+          </script>
 				</div>
 			</main>
 		</body>

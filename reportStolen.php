@@ -53,7 +53,7 @@
               </p>
               <p>
                   <label for='serialnum'>*Serial Number:</label>
-                  <input type='text' name='serialnum'>
+                  <input type='text' name='serialnum' maxlength='15'>
               </p>
               <p>
               <label for='location'>*Location:</label>
@@ -110,16 +110,9 @@
       // search if username exists
       $query = "SELECT 1 FROM Bike
                 WHERE serialnum = '$serial'
-                AND stolen = '$stolen'
-                ";
+                AND stolen = '$stolen'";
       $result = mysqli_query($conn, $query);
-
-      // count how many posts exist to create postID
-      // $query1 = mysqli_query($conn, "SELECT * FROM Bike");
       $postID = $serial."-".$stolen;
-      // while($row = mysqli_fetch_row($query1)) {
-      //   $postID = $postID+1;
-      // }
 
       // create user
       if( mysqli_num_rows($result) < 1 ) { // if bike isnt already in the table
